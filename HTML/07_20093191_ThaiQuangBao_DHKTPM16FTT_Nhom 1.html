@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+    <script src="../JS/jquery-3.6.0.min.js"></script>
+    <script src="../JS/bootstrap.min.js"></script>
+    <script src="../JS/index.js"></script>
+    <script src="../CSS/style.css"></script>
+    <script src="../CSS/bootstrap.css"></script>
+    <link>
+    <script>
+         $(document).ready(function(){
+            var i=1;
+            $("#btn2").click(function(){
+               $("#myModal").modal();
+            })
+
+        });
+        function kiemTraTen(){
+            var i=1;
+            let mauKT = /([A_Z]{1}[a-z]+)((\s{1} [A-Z]{1}[a-z]+){1,})$/;
+            if($("#Name").val()==""){
+                $("#tbName").html("Không để trống");
+                return false;
+            }
+            if (!mauKT.test($("#Name").val())) {
+                $("#tbName").html("Mỗi ký tự đầu viết hoa không sử dụng số");
+                return true;
+            }
+            $("#tName").html("*");
+            return true;
+        }
+        $("#Name").blur(kiemTraTen);
+
+
+         function kiemTraSCMND(){
+             var mauKT = /^\d*$/;
+             if ($("#CMND").val()=="") {
+                 $("#tbCMND").html("Không để trống");
+                 return false;
+             }
+             if (!mauKT.test($("#CMND").val())) {
+                 $("#tbCMND").html("Dùng số từ 1 đến 9 số");
+                 return true;
+             }
+             else{
+                 var SCMND = $("#CMND").val();
+                 if(soCMND < 1 || soCMND> 9)
+                 {
+                     $("#tbAo").html("từ 1 đến 9");
+                 }
+                 else{
+                     $("#tbName").html("*");
+                     return true;
+                 }
+             }
+         }
+         $("#CMND").blur(kiemTraSCMND);
+
+         function KiemTraQueQuan() {
+             var mauKT = /^[A-Z0-9][a-z0-9]*(\s[A-Z0-9][a-z0-9]*)*$/;
+             if ($("#QQ").val()=="") {
+                 $("#tbQQ").html("Không để trống");
+                 return false;
+             }
+             if (!mauKT.test($("#QQ").val())) {
+                 $("#tbQq").html("Mỗi kí tự đầu viết hoa ");
+                 return true;
+             }
+             $("#tbQq").html("*");
+             return true;
+         }
+         $("#QQ").blur(KiemTraQueQuan);
+
+
+        
+
+         function kiemTraSDT(){
+             var mauKT = /^0\d{3}-\d{3}-\d{3}$/;
+             if ($("#SDT").val()=="") {
+                 $("tbSDT").html("Không để trống");
+                 return false;
+             }
+             if (!mauKT.test($("#SDt").val())) {
+                $("#tbSDT").html("Theo dạng 0xxx-xxx-xxx trong đó x là số");
+             return true;
+             }
+             $("#tbSDT").html("*");
+             return true;
+         }
+         $("#SDT").blur(kiemTraSDT);
+
+         $("#Save").click(function(){
+             if(kiemTraTen() == true && kiemTraSCMND()== true && kiemTraQueQuan()== true && kiemTraSDT()== true){
+             row = "<tr>";
+             row +="<th>" + (i++) + "</th>";
+             row +="<th>" + $("#Name").val() + "</th>";
+             row +="<th>" + $("#CMND").val() + "</th>";
+             row +="<th>" + $("#QQ").val() + "</th>";
+            
+             row +="<th>" + $("#SDT").val() + "</th>";
+             row +="<th>" + $("#ADD").val() + "</th>";
+             $("#danhSach").append(row);
+             $("#myModal").modal("hide");
+             }
+         })
+        
+    </script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-12 bg-info" >
+                <div class="col-md-3">
+                    <img src="../IMG/LOGO.PNG" alt="" style="margin-top: 20px; " width="70%">
+                </div>
+                <div class="col-md-9">
+                    <div class="header" style="font-size: 25px; width: 90%;margin-left: 400px; margin-top: 0px;">
+                        <h3 style="text-align: center; color: blue;">BỘ CÔNG THƯƠNG </h3>
+                        <h3 style="text-align: center;color: blue;">TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP TP. HỒ CHÍ MINH</h3>
+                        <h6 style="text-align: center;color: red;">Đổi mới, nâng tầm cao mới - Năng động, hội nhập toàn cầu</h6>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        <div class="col-xs-12">
+            <nav  class="navbar navbar-expand-sm bg-white justify-content-right">
+                <ul class="navbar nav">
+                    <li class="navbar-item"><a class="navbar-link" href="#" style="margin-right :20px;" id="btn1">Đăng nhập</a></li>
+                    <li class="navbar-item"><a class="navbar-link" href="#" id="btn2">Đăng ký</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="col-xs-12">
+            <h4 style="text-align: center;">DANH SÁCH ĐĂNG KÍ LÀM CĂN CƯỚC SINH VIÊN <br></h4>
+            <h4 style="text-align: center;">TRƯỜNG DHCN THÀNH PHỐ HỒ CHÍ MINH </h4>
+            <table class="table table-striped" role="table" id="danhSach">
+                <tr>
+                    <th>STT</th>
+                    <th>Họ và tên</th>
+                    <th>SCMND cũ</th>
+                    <th>Quê quán</th>
+                    <th>Email</th>
+                    <th>Điện thoại</th>
+                    <th>Ảnh đại diện</th>
+                </tr>
+            </table>
+        </div>
+
+        <footer>
+            <div class="col-xs-12">
+                <p style="text-align: center;">SVTH:...Mã sinh viên:......Lớp:......</p>
+
+            </div>
+        </footer>
+        <div class="modal fade" role="dialog" id="myModal"> 
+        <div class="modal-dialog " style="margin-top: 10px;"> 
+                <div class="modal-content"> 
+                    <div class="modal-header"> 
+                        <h2 class="text-left">THÔNG TIN CÁ NHÂN</h2> 
+                     </div> 
+                    <div class="modal-body"> 
+                        <form role="form" class="form-horizontal" style="margin-top: 10px;">
+                          <label for="Name" class="control-label col-xs-3">Họ tên</label>
+                          <div class="col-xs-9">
+                              <input type="text" id="Name" class="form-control">
+                              <span class="text-danger" id="tbName">*</span>
+                          </div>
+                          <label for="CMND" class="control-label col-xs-3">SCMND cũ</label>
+                          <div class="col-xs-9" style="margin-bottom: 10px;">
+                              <input type="text" id="CMND" class="form-control">
+                              <span class="text-danger" style="color: red;"id="tbCMND">*</span>
+                          </div>
+                          <label for="QQ" class="control-label col-xs-3">Quê quán</label>
+                          <div class="col-xs-9" >
+                              <input type="text" id="QQ" class="form-control">
+                              <span class="text-danger" style="color: red;"id="tbDc">*</span>
+                          </div>
+                          <label for="Email" class="control-label col-xs-3">Email</label>
+                          <div class="col-xs-9">
+                              <input type="text" id="Email" class="form-control">
+                              <span class="text-danger" style="color: red;"id="tbEMAIL">*</span>
+                          </div>
+                          <label for="SDT" class="control-label col-xs-3">Điện thoại</label>
+                          <div class="col-xs-9" >
+                              <input type="text" id="SDT" class="form-control">
+                              <span class="text-danger" style="color: red;"id="tbSDT">*</span>
+                          </div>
+                          <label for="ADD" class="control-label col-xs-3">Ảnh đại diện</label>
+                          <div class="col-xs-9" >
+                              <input type="file" id="ADD" class="form-control">
+                              <span class="text-danger" style="color: red;"id="tbAdd">*</span>
+                          </div>
+                          <button class="btn btn-sucess btn-group-justified" id="Save" type="button" style="color:white; background-color: green;; width: 100%;"> Lưu</button>
+                        </form> 
+                    </div> 
+                 </div> 
+            </div>
+        </div>
+    </div>
+</body>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+.navbar {
+    height: 40px;
+}
+
+.navbarx {
+    float: left;
+    display: flex;
+    margin-left: 700px;
+    margin-top: 20px;
+    list-style: none;
+}
+
+.navbaritem {
+    margin-left: 30px;
+}
+
+.list li {
+    color: black;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.list {
+    background-color: rgb(161, 211, 238);
+    border-radius: 10px;
+}
